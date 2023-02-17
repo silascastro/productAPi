@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from src.schemas.Product import ProductSchema
 from src.schemas.Category import CategorySchema
@@ -6,11 +7,25 @@ from src.infra.sqlalchemy.config.database import create_db, get_db
 from src.infra.sqlalchemy.repositories.ProductRepository import ProductRepository
 from src.infra.sqlalchemy.repositories.CategoryRepository import CategoryRepository
 
+
 create_db()
 
 app = FastAPI()
 
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:4200",
+]
 
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @app.get('/product')
