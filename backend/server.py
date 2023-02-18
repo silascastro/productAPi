@@ -1,11 +1,12 @@
-from fastapi import FastAPI, Depends, HTTPException
+from datetime import datetime
+import os
+from os.path import exists
+import shutil
+from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from sqlalchemy.orm import Session
-from src.schemas.Product import ProductSchema
-from src.schemas.Category import CategorySchema
-from src.infra.sqlalchemy.config.database import create_db, get_db
-from src.infra.sqlalchemy.repositories.ProductRepository import ProductRepository
-from src.infra.sqlalchemy.repositories.CategoryRepository import CategoryRepository
+from src.infra.sqlalchemy.config.database import create_db
+
 
 
 create_db()
@@ -27,58 +28,25 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-
-@app.get('/product')
-def getAllProducts(db: Session = Depends(get_db)):
-    return ProductRepository(db).getProducts()
-
-@app.get('/product/{id}')
-def getAllProducts(id: int, db: Session = Depends(get_db)):
-    return ProductRepository(db).getOneProduct(id)
-
-@app.get('/product/category/{id}')
-def getAllProducts(id: int, db: Session = Depends(get_db)):
-    return ProductRepository(db).getProductsByCategory(id)
-
-@app.post('/product')
-def createProduct(product: ProductSchema, db: Session = Depends(get_db)):
-    newproduct = ProductRepository(db).createProduct(product)
-    return newproduct
-
-@app.delete('/product/{id}')
-def deleteProduct(id: int, db: Session = Depends(get_db)):
-    return ProductRepository(db).deleteProduct(id=id)
+from src.routes import product,category, review
 
 
+@app.post('/upload')
+def uploadImage(file: UploadFile = File(...)):
+    newFileName = datetime.utcnow().strftime('%B-%d-%YT%H:%M:%S')+file.filename
+    location = 'uploads/'
 
-#category route
+    with open(location+newFileName, "wb") as buffer:
+        shutil.copyfileobj(file.file, buffer)
+    return {"filename": newFileName}
 
-@app.post('/category')
-def createCategory(category: CategorySchema, db: Session = Depends(get_db)):
-    newCategory = CategoryRepository(db).createCategory(category)
-    return newCategory
-
-@app.get('/category')
-def getAllCategories(db: Session = Depends(get_db)):
-    return CategoryRepository(db).getAllCategories()
-
-@app.get('/category/{id}')
-def getOneCategory(id: int, db: Session = Depends(get_db)):
-    db_category = CategoryRepository(db).getOneCategory(id)
-    if db_category is None:
-        raise HTTPException(status_code=404, detail="category not found")
-    return db_category
-
-
-@app.put('/category/{id}')
-def createCategory(id: int, category: CategorySchema, db: Session = Depends(get_db)):
-    db_category = CategoryRepository(db).getOneCategory(id)
-    if db_category is None:
-        raise HTTPException(status_code=404, detail="category not found")
+@app.get('/upload/{filename}')
+def getImage(filename:str):
+    path = './uploads/'
+    file = exists(path+filename)
+    if not file:
+        raise HTTPException(status_code=404, detail="image not found")
     else:
-        return CategoryRepository(db).updateCategory(category=category,id=id)
+        return FileResponse(path+filename)
 
 
-@app.delete('/category/{id}')
-def deleteOneCategory(id: int, db: Session = Depends(get_db)):
-    return CategoryRepository(db).deleteCategory(id)

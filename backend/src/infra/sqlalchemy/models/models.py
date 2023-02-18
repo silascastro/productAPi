@@ -11,8 +11,19 @@ class Product(Base):
     category_id = Column(Integer, ForeignKey("category.id"))
     price = Column(Double)
     serie = Column(Integer)
+    image = Column(String(250))
 
     categories = relationship("Category", back_populates="product_list")
+
+
+class Review(Base):
+    __tablename__ = 'review'
+
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    title = Column(String(40))
+    comentary = Column(String(128))
+    rate = Column(Integer)
+    product_id = Column(Integer, ForeignKey("product.id"))
 
 
 
