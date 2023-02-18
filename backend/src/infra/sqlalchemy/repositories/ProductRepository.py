@@ -44,6 +44,7 @@ class ProductRepository():
         return "Product has been updated"
 
     def deleteProduct(self, id: int):
+        self.db.query(models.Review).filter(models.Review.product_id == id).delete();
         self.db.query(models.Product).filter(models.Product.id == id).delete()
         self.db.commit()
         return "Product has been deleted"
