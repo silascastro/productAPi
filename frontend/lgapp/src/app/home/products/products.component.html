@@ -1,0 +1,36 @@
+<main>
+  <ng-template #noProducts>
+    <div *ngIf="!loading" class="empty">Nenhum produto cadastrado!</div>
+  </ng-template>
+
+  <app-loading *ngIf="loading" class="loading"></app-loading>
+  <section
+    *ngIf="products.value.length > 0; else noProducts"
+    class="products-container"
+  >
+    <div
+      *ngFor="let product of products.value"
+      class="product-card"
+      [routerLink]="['description', product.id]"
+    >
+      <img [src]="uploadUrl + '/' + product.image" alt="" />
+
+      <span class="info">
+        <span>{{ product.name }}</span>
+
+        <img src="../../../assets/next.svg" width="20px" alt="" />
+      </span>
+    </div>
+  </section>
+
+  <button
+    class="add-product-btn"
+    mat-mini-fab
+    color="primary"
+    matTooltip="Primary"
+    aria-label="Example icon button with a menu icon"
+    (click)="openCreateProductModal()"
+  >
+    <mat-icon>add</mat-icon>
+  </button>
+</main>

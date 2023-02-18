@@ -1,0 +1,99 @@
+.container {
+  padding: 0;
+}
+
+img {
+  max-width: 600px;
+}
+
+.container .inner {
+  background-color: rgb(20, 20, 20);
+  display: flex;
+  flex-direction: row;
+  padding: 2rem;
+}
+
+.inner .description {
+  color: #fff;
+  width: 30%;
+  padding-left: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 50px;
+}
+
+.description .description-item h2 {
+  margin: 0;
+}
+
+.product-info {
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.title {
+  font-size: 2rem;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.description h2 {
+  font-weight: 500;
+}
+
+/*Reviews*/
+
+.reviews {
+  padding: 2rem;
+  display: flex;
+  flex-direction: row;
+}
+
+.no-reviews {
+  height: 200px;
+  background: url("../../../../assets/bg-reviews.svg") no-repeat;
+  background-size: contain;
+  background-position: center center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.reviews .users-reviews {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+}
+
+.reviews .my-review {
+  display: flex;
+  flex-direction: column;
+  width: 30%;
+}
+
+.reviews .title {
+  font-size: 2rem;
+  color: black;
+  font-weight: 500;
+}
+
+.review-card {
+  width: 50%;
+  margin-bottom: 10px;
+}
+
+.review-card mat-card-actions {
+  display: flex;
+  justify-content: end;
+}
+
+.divider {
+  margin-right: 20px;
+}

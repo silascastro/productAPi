@@ -1,0 +1,23 @@
+.modal-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+.mat-form-field {
+  width: 100%;
+}
+
+.price {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}

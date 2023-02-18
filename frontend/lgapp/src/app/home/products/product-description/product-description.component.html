@@ -1,0 +1,115 @@
+<main *ngIf="product && reviews" class="container">
+  <section class="inner">
+    <div class="product-info">
+      <a [routerLink]="'/products'">&#60;Back</a>
+      <h1 class="title">{{ product?.name }}</h1>
+      <img
+        [src]="uploadUrl + '/' + product.image"
+        alt="Imagem do produto"
+        height="400px"
+      />
+    </div>
+    <div class="description">
+      <div class="description-item">
+        <h2>Category</h2>
+        <span>
+          {{ category }}
+        </span>
+      </div>
+
+      <div class="description-item">
+        <h2>Serie</h2>
+        <span>
+          {{ product.serie }}
+        </span>
+      </div>
+
+      <div class="description-item">
+        <h2>Price</h2>
+        <span>
+          {{ product.price || "N/A" }}
+        </span>
+      </div>
+
+      <div class="description-item">
+        <h2 style="margin-bottom: 1rem">Actions</h2>
+        <div>
+          <button
+            mat-raised-button
+            style="margin-right: 1rem"
+            (click)="openEditModal()"
+          >
+            Editar
+          </button>
+          <button mat-raised-button (click)="deleteMovie()">Remover</button>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="reviews">
+    <aside class="users-reviews">
+      <h2 class="title">Avaliações de usuários</h2>
+
+      <div *ngIf="reviews.length > 0; else noReview">
+        <mat-card *ngFor="let review of reviews" class="review-card">
+          <mat-card-header>
+            <mat-card-title>{{ review.review_note }}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>
+              {{ review.review_comentary }}
+            </p>
+            <mat-divider></mat-divider>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Example icon button with a vertical three dot icon"
+            >
+              <mat-icon>star</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              color="primary"
+              aria-label="Example icon button with a vertical three dot icon"
+            >
+              <mat-icon>star</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              aria-label="Example icon button with a vertical three dot icon"
+            >
+              <mat-icon>star</mat-icon>
+            </button>
+            <button
+              mat-icon-button
+              aria-label="Example icon button with a vertical three dot icon"
+            >
+              <mat-icon>star</mat-icon>
+            </button>
+
+            <button
+              mat-icon-button
+              aria-label="Example icon button with a vertical three dot icon"
+            >
+              <mat-icon>star</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+
+      <ng-template #noReview>
+        <div class="no-reviews">Nenhuma review ainda</div>
+      </ng-template>
+    </aside>
+
+    <mat-divider class="divider" [vertical]="true"></mat-divider>
+
+    <app-new-review
+      class="my-review"
+      (newReviewEvent)="updateData($event)"
+      [movieId]="id"
+    ></app-new-review>
+  </section>
+</main>

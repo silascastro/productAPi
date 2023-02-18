@@ -1,0 +1,83 @@
+<main class="modal-container">
+  <h2 mat-dialog-title>
+    {{ productData ? "Edit Product" : "Add Product" }}
+  </h2>
+  <form class="form-section" [formGroup]="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Name</mat-label>
+      <input formControlName="name" matInput placeholder="Ex: Iphone 14" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Category</mat-label>
+      <mat-select formControlName="category">
+        <mat-option *ngFor="let category of categories" [value]="category.id"
+          >{{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Product serie</mat-label>
+      <input formControlName="serie" matInput placeholder="Ex: 111111" />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" floatLabel="always">
+      <mat-label>Price</mat-label>
+      <div style="display: flex">
+        <span matTextPrefix>$&nbsp;</span>
+        <input
+          matInput
+          formControlName="price"
+          type="number"
+          class="example-right-align"
+          placeholder="0"
+        />
+      </div>
+    </mat-form-field>
+
+    <div class="file-uplaod">
+      <button
+        mat-button
+        color="primary"
+        type="button"
+        (click)="fileInput.click()"
+      >
+        Imagem do filme
+      </button>
+      <mat-hint *ngIf="!fileUploaded"
+        >Selecione uma imagem para o filme</mat-hint
+      >
+      <input
+        hidden
+        #fileInput
+        (change)="setNewImage($event)"
+        type="file"
+        id="file"
+      />
+
+      <mat-hint *ngIf="fileUploaded">
+        {{ file.value.name }}
+        <button mat-button (click)="clearFile()">delete</button>
+      </mat-hint>
+    </div>
+    <mat-error *ngIf="file.getError('fileIncorrect')"
+      >formato de arquivo inválido</mat-error
+    >
+  </form>
+
+  <div class="actions">
+    <button mat-raised-button color="primary" (click)="close()">
+      Cancelar
+    </button>
+    <button
+      mat-raised-button
+      color="accent"
+      style="margin-left: 20px"
+      (click)="handlerCadastrar()"
+      [disabled]="this.form.invalid"
+    >
+      Cadastrar
+    </button>
+  </div>
+</main>

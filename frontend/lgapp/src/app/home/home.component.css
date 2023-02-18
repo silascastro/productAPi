@@ -1,0 +1,51 @@
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.navbar {
+  background-color: #171717;
+  color: aliceblue;
+  text-align: center;
+  font-size: 1.5rem;
+  height: 80px;
+  align-items: center;
+  display: flex;
+}
+
+ul {
+  margin: 0;
+}
+
+ul li {
+  display: inline-block;
+  list-style: none;
+  margin-right: 20px;
+}
+
+ul li p {
+  line-height: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+}
+
+li a:hover {
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: 0.25s;
+}
+
+.header-left {
+  position: absolute;
+  top: 2rem;
+  right: 1rem;
+  font-size: 1rem;
+}
+
+.add-movie-btn {
+  position: absolute;
+  right: 30px;
+  bottom: 30px;
+}
