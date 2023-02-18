@@ -1,9 +1,9 @@
-import { UploadImageService } from './../../../assets/app/core/services/upload-image.service';
 import { ProductService } from './../../core/services/product.service';
 import { Product } from './../../core/models/product';
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UploadImageService } from 'src/app/core/services/upload-image.service';
 
 @Component({
   selector: 'app-new-product-modal',
@@ -103,6 +103,7 @@ export class NewProductModalComponent implements OnInit {
 
     this.uploadImageService.postImage(image).subscribe(
       (response: any) => {
+        console.log(response);
         const { filename } = response;
         const data = {
           name: this.name.value,

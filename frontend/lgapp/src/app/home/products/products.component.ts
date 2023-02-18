@@ -1,6 +1,8 @@
-import { FeedbackService } from './../../../assets/app/core/services/feedback.service';
+import { FeedbackService } from './../../core/services/feedback.service';
+import { UploadImageService } from './../../core/services/upload-image.service';
+
 import { ProductService } from './../../core/services/product.service';
-import { UploadImageService } from './../../../assets/app/core/services/upload-image.service';
+
 import { MatDialog } from '@angular/material/dialog';
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';

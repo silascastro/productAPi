@@ -30,7 +30,6 @@ app.add_middleware(
 
 from src.routes import product,category, review
 
-
 @app.post('/upload')
 def uploadImage(file: UploadFile = File(...)):
     newFileName = datetime.utcnow().strftime('%B-%d-%YT%H:%M:%S')+file.filename
@@ -48,5 +47,8 @@ def getImage(filename:str):
         raise HTTPException(status_code=404, detail="image not found")
     else:
         return FileResponse(path+filename)
+
+
+
 
 

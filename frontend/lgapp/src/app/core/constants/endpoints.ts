@@ -6,6 +6,9 @@ export const CRUDAPP = {
 
   CATEGORIES: `${API}/category`,
   CATEGORIE: (id) => `${API}/category/${id}`,
+
+  REVIEWS: `${API}/review`,
+  REVIEW: (id) => `${API}/review/${id}`,
 };
 
 export const UPLOAD = {

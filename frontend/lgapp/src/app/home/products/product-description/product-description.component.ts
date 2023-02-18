@@ -1,5 +1,6 @@
+import { ReviewService } from './../../../core/services/review.service';
 import { Category } from './../../../core/models/category';
-import { FeedbackService } from './../../../../assets/app/core/services/feedback.service';
+
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductService } from './../../../core/services/product.service';
@@ -7,12 +8,13 @@ import { Component, OnInit } from '@angular/core';
 import { UPLOADS } from 'src/app/core/constants/common';
 import { Product } from 'src/app/core/models/product';
 import { NewProductModalComponent } from 'src/app/shared/new-product-modal/new-product-modal.component';
+import { FeedbackService } from 'src/app/core/services/feedback.service';
 
 @Component({
   selector: 'app-product-description',
   templateUrl: './product-description.component.html',
   styleUrls: ['./product-description.component.scss'],
-  providers: [FeedbackService, ProductService],
+  providers: [FeedbackService, ProductService, ReviewService],
 })
 export class ProductDescriptionComponent implements OnInit {
   public id: number;
@@ -24,7 +26,8 @@ export class ProductDescriptionComponent implements OnInit {
     private dialog: MatDialog,
     private router: ActivatedRoute,
     private fbService: FeedbackService,
-    private routerNavigate: Router
+    private routerNavigate: Router,
+    private reviewService: ReviewService
   ) {}
 
   public product: Product = null;
@@ -37,6 +40,7 @@ export class ProductDescriptionComponent implements OnInit {
     });
     this.loadingReviews = true;
     this.getProduct();
+    this.getReviews();
   }
 
   public getProduct(): void {
@@ -55,6 +59,12 @@ export class ProductDescriptionComponent implements OnInit {
           this.fbService.showFeedbackSnack('aconteceu um erro!');
         }
       );
+    });
+  }
+
+  public getReviews(): any {
+    this.reviewService.getReviews(this.id).subscribe((response) => {
+      this.reviews = response;
     });
   }
 
@@ -81,7 +91,7 @@ export class ProductDescriptionComponent implements OnInit {
           product: this.product,
         },
         disableClose: true,
-        height: '450px',
+        height: '550px',
         width: '500px',
       })
       .afterClosed()
@@ -90,6 +100,10 @@ export class ProductDescriptionComponent implements OnInit {
           this.updateProduct(result);
         }
       });
+  }
+
+  public updateData(event): void {
+    this.getReviews();
   }
 
   public updateProduct(data): void {

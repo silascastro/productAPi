@@ -1,0 +1,34 @@
+<form class="my-review" [formGroup]="form">
+  <h2>Write a customer review</h2>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input
+      matInput
+      placeholder="Ex. Nice product"
+      value="Sushi"
+      formControlName="review_note"
+    />
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Comentary</mat-label>
+    <textarea
+      rows="3"
+      matInput
+      placeholder="Ex. It makes me feel..."
+      formControlName="review_comentary"
+    ></textarea>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Rate </mat-label>
+    <mat-select formControlName="review_rate">
+      <mat-option *ngFor="let rate of rate" [value]="rate">
+        {{ rate }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-button (click)="submit()" [disabled]="form.invalid">Send</button>
+</form>

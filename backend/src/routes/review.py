@@ -7,10 +7,10 @@ from src.infra.sqlalchemy.repositories.ReviewRepository import ReviewRepository
 
 
 @app.get('/review/{id}')
-def getAllReviewsFromProduct(product_id: int, db: Session = Depends(get_db)):
-    return ReviewRepository(db).getAllReviewsFromProduct(product_id=product_id)
+def getAllReviewsFromProduct(id: int, db: Session = Depends(get_db)):
+    return ReviewRepository(db).getAllReviewsFromProduct(product_id=id)
 
-@app.post('/product')
+@app.post('/review')
 def createProduct(review: ReviewSchema, db: Session = Depends(get_db)):
     newReview = ReviewRepository(db).createReview(review=review)
     return newReview
