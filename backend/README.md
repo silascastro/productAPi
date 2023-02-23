@@ -37,12 +37,8 @@ $ cd backend
 $ python3 -m venv venv
 # activate the enviroment with
 $ . venv/bin/activate
-# Install the fastapi
-$ pip install fastapi
-# Install the uvicorn
-$ pip install "uvicorn[standard]"
-# Install MySQLdb interface to connect mysql/mariadb
-$ pip install MySQL-python
+# Install the packages and libraries
+$ pip install -r requirements.txt
 # Run
 $ uvicorn server:app --reload
 ```
