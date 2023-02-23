@@ -2,10 +2,13 @@ from datetime import datetime
 import os
 from os.path import exists
 import shutil
-from fastapi import FastAPI, UploadFile, File, HTTPException
+from fastapi import FastAPI, UploadFile, File, HTTPException, Depends
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from src.infra.sqlalchemy.config.database import create_db
+from src.infra.sqlalchemy.config.database import create_db, get_db
+
+from  src.schemas.Category import CategorySchema
+from src.infra.sqlalchemy.models import models
 
 
 
@@ -27,6 +30,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 from src.routes import product,category, review
 
