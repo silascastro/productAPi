@@ -42,3 +42,16 @@ $ pip install -r requirements.txt
 # Run
 $ uvicorn server:app --reload
 ```
+# Update database to your local database on database script
+```
+  _backend
+  └── src
+   └── infra
+    └── sqlalchemy
+      └── config
+        └── database.py 
+```
+
+```python   
+    SQLALCHEMY_DATABASE_URL = "mysql+pymysql://<user>:<password>@127.0.0.1:3306/<database>"
+```
