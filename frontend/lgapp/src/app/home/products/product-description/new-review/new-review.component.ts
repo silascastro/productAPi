@@ -1,6 +1,6 @@
 import { ReviewService } from './../../../../core/services/review.service';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AbstractControl, FormBuilder, Validators } from '@angular/forms';
+import { AbstractControl, UntypedFormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FeedbackService } from 'src/app/core/services/feedback.service';
 
@@ -26,7 +26,7 @@ export class NewReviewComponent implements OnInit {
 
   constructor(
     private reviewService: ReviewService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private fbService: FeedbackService,
     private routerNavigate: Router
   ) {}

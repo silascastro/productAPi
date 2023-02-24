@@ -4,7 +4,7 @@ import { UploadImageService } from './../../core/services/upload-image.service';
 import { ProductService } from './../../core/services/product.service';
 
 import { MatDialog } from '@angular/material/dialog';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { NewProductModalComponent } from 'src/app/shared/new-product-modal/new-product-modal.component';
 import { Product } from 'src/app/core/models/product';
@@ -24,7 +24,7 @@ export class ProductsComponent implements OnInit {
     products: '',
   });
   constructor(
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private dialog: MatDialog,
     private productService: ProductService,
     private feedbackService: FeedbackService

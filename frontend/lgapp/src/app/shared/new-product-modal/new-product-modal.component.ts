@@ -1,7 +1,7 @@
 import { ProductService } from './../../core/services/product.service';
 import { Product } from './../../core/models/product';
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { UntypedFormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UploadImageService } from 'src/app/core/services/upload-image.service';
 
@@ -15,7 +15,7 @@ export class NewProductModalComponent implements OnInit {
   constructor(
     private dialogRef: MatDialogRef<NewProductModalComponent>,
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private productService: ProductService,
     private uploadImageService: UploadImageService
   ) {}
