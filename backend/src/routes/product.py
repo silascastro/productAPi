@@ -1,4 +1,4 @@
-from server import app
+from main import app
 from fastapi import Depends, HTTPException
 from sqlalchemy.orm import Session
 from src.schemas.Product import ProductSchema
